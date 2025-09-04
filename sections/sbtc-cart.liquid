@@ -1,0 +1,2055 @@
+
+
+{%- style -%}
+  /* sBTC Checkout Styles */
+  .cart__header {
+    padding-bottom: 2rem;
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    margin-bottom: 3rem;
+  }
+
+  .cart__header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .cart__title {
+    margin: 0;
+    font-size: 2.4rem;
+    line-height: 1.2;
+  }
+
+  .cart__subtitle {
+    margin: 0.5rem 0 0;
+    color: rgba(var(--color-foreground), 0.75);
+    font-size: 1.4rem;
+  }
+
+  .cart__layout {
+    display: grid;
+    grid-template-columns: 1fr 32rem;
+    gap: 4rem;
+    margin-top: 2rem;
+  }
+
+  @media screen and (max-width: 989px) {
+    .cart__layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    
+    .cart__header-content {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  .cart__block-title {
+    margin: 0 0 2rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  /* Step Styles */
+  .sbtc-step {
+    border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    padding-bottom: 2.4rem;
+    margin-bottom: 2.4rem;
+  }
+
+  .sbtc-step:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .sbtc-step--disabled {
+    opacity: 0.5;
+  }
+
+  .sbtc-step--always-visible {
+    opacity: 1 !important;
+  }
+
+  .sbtc-step__header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.6rem;
+  }
+
+  .sbtc-step__icon {
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 50%;
+    background-color: rgba(var(--color-foreground), 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: rgba(var(--color-foreground), 0.75);
+    transition: all 0.3s ease;
+  }
+
+  .sbtc-step__icon--completed {
+    background-color: #22c55e;
+    color: white;
+  }
+
+  .sbtc-step__icon--active {
+    background-color: rgb(var(--color-foreground));
+    color: rgb(var(--color-background));
+  }
+
+  .sbtc-step__title {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 500;
+  }
+
+  .sbtc-step__content {
+    margin-left: 3.6rem;
+  }
+
+  /* Form Styles */
+  .sbtc-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+    gap: 1.6rem;
+    margin-bottom: 2rem;
+  }
+
+  .sbtc-form-grid--full {
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  }
+
+  .sbtc-wallet-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 1.2rem;
+  }
+
+  .sbtc-wallet-info {
+    font-size: 1.2rem;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  .sbtc-wallet-label {
+    margin-right: 0.8rem;
+  }
+
+  .sbtc-wallet-address {
+    font-family: ui-monospace, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    background-color: rgba(var(--color-foreground), 0.04);
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.4rem;
+  }
+
+  .sbtc-action-row {
+    display: flex;
+    gap: 1.2rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .sbtc-transaction-id {
+    font-family: ui-monospace, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    color: rgba(var(--color-foreground), 0.75);
+    font-size: 1.2rem;
+    word-break: break-all;
+  }
+
+  /* Environment Details */
+  .sbtc-env-details {
+    margin-top: 2rem;
+  }
+
+  .sbtc-env-details__summary {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-weight: 500;
+    color: rgba(var(--color-foreground), 0.75);
+    padding: 1rem 0;
+  }
+
+  .sbtc-env-details__summary:hover {
+    color: rgb(var(--color-foreground));
+  }
+
+  .sbtc-env-details__summary .icon {
+    margin-right: 0.8rem;
+    transition: transform 0.3s ease;
+  }
+
+  .sbtc-env-details[open] .sbtc-env-details__summary .icon {
+    transform: rotate(90deg);
+  }
+
+  .sbtc-env-details__content {
+    padding: 1.6rem;
+    border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    border-radius: 0.8rem;
+    margin-top: 0.8rem;
+  }
+
+  /* Sidebar Styles */
+  .cart__sidebar-block {
+    background-color: rgba(var(--color-foreground), 0.02);
+    border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    border-radius: 0.8rem;
+    padding: 2rem;
+    position: sticky;
+    top: 2rem;
+  }
+
+  .cart__sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.6rem;
+  }
+
+  .cart__sidebar-title {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  .button--small {
+    min-height: 3.2rem;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.2rem;
+  }
+
+  .sbtc-orders-list {
+    max-height: 40rem;
+    overflow-y: auto;
+  }
+
+  .sbtc-empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+
+  .sbtc-empty-state__text {
+    margin: 0;
+    color: rgba(var(--color-foreground), 0.5);
+    font-size: 1.4rem;
+    line-height: 1.4;
+  }
+
+  /* Modal Styles */
+  .sbtc-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .sbtc-modal__backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    cursor: pointer;
+  }
+
+  .sbtc-modal__content {
+    position: relative;
+    z-index: 10000;
+    background-color: #ffffff;
+    color: #0f172a;
+    border-radius: 1.2rem;
+    border: 1px solid #e5e7eb;
+    max-width: 50rem;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 2rem 4rem rgba(2, 6, 23, 0.3);
+    margin: auto;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  /* Prevent body scroll when modal is open */
+  body.sbtc-modal-open {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* Mobile responsiveness for modal */
+  @media screen and (max-width: 768px) {
+    .sbtc-modal {
+      padding: 1rem;
+    }
+    
+    .sbtc-modal__content {
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 0.8rem;
+    }
+  }
+
+  /* IRS Receipt Styles */
+  .sbtc-irs-receipt {
+    background-color: white;
+    color: #000;
+    border: 0.2rem solid #000;
+    border-radius: 0;
+    font-family: 'Courier New', monospace;
+    margin: 2rem 0;
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .sbtc-irs-receipt__header {
+    background-color: #f8f9fa;
+    border-bottom: 0.2rem solid #000;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .sbtc-irs-receipt__vendor-name {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0 0 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .sbtc-irs-receipt__vendor-details {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  .sbtc-irs-receipt__title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    margin: 1.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border-top: 0.1rem solid #000;
+    border-bottom: 0.1rem solid #000;
+    padding: 1rem 0;
+  }
+
+  .sbtc-irs-receipt__body {
+    padding: 2rem;
+  }
+
+  .sbtc-irs-receipt__section {
+    margin-bottom: 2rem;
+    border-bottom: 0.1rem dashed #666;
+    padding-bottom: 1.5rem;
+  }
+
+  .sbtc-irs-receipt__section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .sbtc-irs-receipt__section-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 0 0 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .sbtc-irs-receipt__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 0.8rem;
+    border-bottom: 0.1rem dotted #ccc;
+    padding-bottom: 0.5rem;
+  }
+
+  .sbtc-irs-receipt__row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+
+  .sbtc-irs-receipt__label {
+    font-weight: bold;
+    min-width: 40%;
+  }
+
+  .sbtc-irs-receipt__value {
+    text-align: right;
+    font-weight: normal;
+    word-break: break-word;
+  }
+
+  .sbtc-irs-receipt__total-row {
+    background-color: #f8f9fa;
+    margin: 1.5rem -1rem 0;
+    padding: 1rem;
+    border: 0.2rem solid #000;
+    font-size: 1.6rem;
+    font-weight: bold;
+  }
+
+  .sbtc-irs-receipt__footer {
+    background-color: #f8f9fa;
+    border-top: 0.2rem solid #000;
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+
+  .sbtc-irs-receipt__verification {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: #e8f5e8;
+    border: 0.1rem solid #4caf50;
+    font-size: 1rem;
+  }
+
+  .sbtc-irs-receipt__print-note {
+    margin-top: 1rem;
+    font-style: italic;
+    color: #666;
+    font-size: 1rem;
+  }
+
+  /* Print Styles for IRS Receipt */
+  @media print {
+    .sbtc-modal__backdrop,
+    .sbtc-modal__header,
+    .sbtc-modal__close,
+    .button {
+      display: none !important;
+    }
+    
+    .sbtc-modal__content {
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      max-width: none !important;
+      max-height: none !important;
+      margin: -4px !important;
+      padding: 0 !important;
+    }
+    
+    .sbtc-irs-receipt {
+      border: 0.3rem solid #000 !important;
+      page-break-inside: avoid;
+      margin: 0 !important;
+      font-size: 12pt !important;
+    }
+    
+    .sbtc-irs-receipt__header {
+      background-color: #f0f0f0 !important;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+    }
+    
+    .sbtc-irs-receipt__footer {
+      background-color: #f0f0f0 !important;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+    }
+    
+    .sbtc-irs-receipt__verification {
+      background-color: #e0e0e0 !important;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+    }
+  }
+
+  .sbtc-modal__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.4rem 2.4rem 0;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .sbtc-modal__title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  .sbtc-modal__close {
+    background: none;
+    border: none;
+    padding: 0.8rem;
+    cursor: pointer;
+    color: #475569;
+    border-radius: 0.4rem;
+    transition: all 0.3s ease;
+  }
+
+  .sbtc-modal__close:hover {
+    background-color: #f1f5f9;
+    color: #0f172a;
+  }
+
+  .sbtc-modal__body {
+    padding: 0 2.4rem 2.4rem;
+  }
+
+  .sbtc-modal__section {
+    border: 1px solid #e5e7eb;
+    border-radius: 0.8rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .sbtc-modal__section:last-child {
+    margin-bottom: 0;
+  }
+
+  .sbtc-modal__section--success {
+    background-color: rgba(34, 197, 94, 0.05);
+    border-color: rgba(34, 197, 94, 0.2);
+  }
+
+  .sbtc-modal__section--pending {
+    background-color: rgba(245, 158, 11, 0.05);
+    border-color: rgba(245, 158, 11, 0.2);
+  }
+
+  .sbtc-modal__order-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .sbtc-modal__order-title {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+  }
+
+  .sbtc-modal__success-title {
+    margin: 0 0 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgb(34, 197, 94);
+  }
+
+  .sbtc-modal__pending-title {
+    margin: 0 0 1.6rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: rgb(245, 158, 11);
+  }
+
+  .sbtc-modal__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.6rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .sbtc-modal__field {
+    /* Default single column */
+  }
+
+  .sbtc-modal__field--full {
+    grid-column: 1 / -1;
+    margin-bottom: 1.6rem;
+  }
+
+  .sbtc-modal__field-label {
+    font-size: 1.2rem;
+    color: #64748b;
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+  }
+
+  .sbtc-modal__field-label--success {
+    color: rgb(34, 197, 94);
+  }
+
+  .sbtc-modal__field-value {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: #0f172a;
+  }
+
+  .sbtc-modal__field-value--mono {
+    font-family: ui-monospace, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  }
+
+  .sbtc-modal__code-block {
+    font-family: ui-monospace, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    font-size: 1.1rem;
+    word-break: break-all;
+    background-color: #f8fafc;
+    padding: 1.2rem;
+    border-radius: 0.6rem;
+    border: 1px solid #e2e8f0;
+    color: #0f172a;
+  }
+
+  .sbtc-modal__transaction-result {
+    margin-top: 1.2rem;
+    font-family: ui-monospace, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+    color: #475569;
+    font-size: 1.2rem;
+    word-break: break-all;
+    padding: 1rem;
+    background-color: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.4rem;
+    min-height: 1.4rem;
+  }
+
+  /* Order Item Styles */
+  .sbtc-order-item {
+    border: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    border-radius: 0.8rem;
+    padding: 1.6rem;
+    margin-bottom: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: rgb(var(--color-background));
+  }
+
+  .sbtc-order-item:hover {
+    border-color: rgba(var(--color-foreground), 0.2);
+    box-shadow: 0 0.4rem 0.8rem rgba(var(--color-foreground), 0.1);
+  }
+
+  .sbtc-order-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .sbtc-order-item__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+  }
+
+  .sbtc-order-item__title {
+    font-weight: 600;
+    font-size: 1.4rem;
+    color: rgb(var(--color-foreground));
+  }
+
+  .sbtc-order-item__status {
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.4rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .sbtc-order-item__status--paid {
+    background-color: rgba(34, 197, 94, 0.1);
+    color: rgb(34, 197, 94);
+  }
+
+  .sbtc-order-item__status--pending {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: rgb(245, 158, 11);
+  }
+
+  .sbtc-order-item__details {
+    font-size: 1.2rem;
+    color: rgba(var(--color-foreground), 0.75);
+    margin-bottom: 0.4rem;
+  }
+
+  .sbtc-order-item__date {
+    font-size: 1.1rem;
+    color: rgba(var(--color-foreground), 0.5);
+  }
+
+  .sbtc-order-item__receipt {
+    border-top: 0.1rem solid rgba(var(--color-foreground), 0.08);
+    margin-top: 0.8rem;
+    padding-top: 0.8rem;
+  }
+
+  .sbtc-order-item__receipt-title {
+    font-size: 1.1rem;
+    color: rgb(34, 197, 94);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .sbtc-order-item__receipt-details {
+    font-size: 1.1rem;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  /* Payment Success State */
+  .sbtc-success-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.05) 0%, rgba(34, 197, 94, 0.1) 100%);
+    border: 0.2rem solid rgba(34, 197, 94, 0.2);
+    border-radius: 1.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .sbtc-success-state__icon {
+    width: 8rem;
+    height: 8rem;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 4rem;
+    color: white;
+    box-shadow: 0 1rem 2rem rgba(34, 197, 94, 0.3);
+    animation: sbtc-success-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes sbtc-success-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  .sbtc-success-state__title {
+    margin: 0 0 1rem;
+    font-size: 2.4rem;
+    font-weight: 700;
+    color: #16a34a;
+  }
+
+  .sbtc-success-state__subtitle {
+    margin: 0 0 2rem;
+    font-size: 1.6rem;
+    color: rgba(var(--color-foreground), 0.75);
+    line-height: 1.5;
+  }
+
+  .sbtc-success-state__details {
+    background-color: rgba(34, 197, 94, 0.05);
+    border: 0.1rem solid rgba(34, 197, 94, 0.15);
+    border-radius: 0.8rem;
+    padding: 2rem;
+    margin: 2rem 0;
+    text-align: left;
+  }
+
+  .sbtc-success-state__detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 0;
+    border-bottom: 0.1rem solid rgba(34, 197, 94, 0.1);
+  }
+
+  .sbtc-success-state__detail-row:last-child {
+    border-bottom: none;
+  }
+
+  .sbtc-success-state__detail-label {
+    font-weight: 500;
+    color: rgba(var(--color-foreground), 0.75);
+  }
+
+  .sbtc-success-state__detail-value {
+    font-weight: 600;
+    color: #16a34a;
+    font-family: ui-monospace, Menlo, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  }
+
+  .sbtc-success-state__actions {
+    display: flex;
+    gap: 1.2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  /* Utility Classes */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+{%- endstyle -%}
+
+<section id="sbtc-cart-{{ section.id }}" class="page-width cart" style="display: none;">
+  <!-- sBTC Checkout Header -->
+  <div class="sbtc-checkout-header">
+    <div class="cart__header">
+      <div class="cart__header-content">
+        <div>
+          <h1 class="cart__title">sBTC Checkout</h1>
+          <p class="cart__subtitle">Complete your payment with Bitcoin via sBTC</p>
+        </div>
+        <button id="sbtc-back-to-cart-{{ section.id }}" class="button button--secondary">Back to Cart</button>
+    </div>
+    </div>
+    
+    <!-- Locked Cart Summary -->
+    <div class="sbtc-cart-summary">
+      <div style="display: flex; align-items: baseline; gap: 1rem;">
+        <h3 style="margin: 0; font-size: 1.6rem; font-weight: 500;">Cart Total:</h3>
+        <div id="sbtc-locked-total-{{ section.id }}" style="font-size: 2rem; font-weight: 700;">
+          {{ cart.total_price | money_with_currency }}
+        </div>
+        <div style="color: rgba(var(--color-foreground), 0.75); font-size: 1.4rem;">
+          <span id="sbtc-item-count-{{ section.id }}">{{ cart.item_count }}</span> item{% unless cart.item_count == 1 %}s{% endunless %}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="cart__contents">
+    <div class="cart__layout">
+      <!-- Main Content -->
+      <div class="cart__main">
+        <!-- Payment Success State (Hidden by default) -->
+        <div id="sbtc-{{ section.id }}-success-state" class="sbtc-success-state" style="display: none;">
+          <div class="sbtc-success-state__icon">✓</div>
+          <h2 class="sbtc-success-state__title">Payment Complete!</h2>
+          <p class="sbtc-success-state__subtitle">Your sBTC payment has been successfully processed and confirmed on the blockchain.</p>
+          
+          <div id="sbtc-{{ section.id }}-success-details" class="sbtc-success-state__details">
+            <!-- Success details will be populated here -->
+          </div>
+          
+          <div class="sbtc-success-state__actions">
+            <button id="sbtc-{{ section.id }}-back-to-steps" class="button button--secondary">
+              Make Another Payment
+            </button>
+            <button id="sbtc-{{ section.id }}-view-receipt" class="button button--primary">
+              View Receipt
+            </button>
+          </div>
+        </div>
+
+        <!-- Payment Steps (Default view) -->
+        <div id="sbtc-{{ section.id }}-payment-steps" class="cart__blocks">
+          <div class="cart__block">
+            <h2 class="cart__block-title">Payment Steps</h2>
+        
+        <!-- Step 1: Connect Wallet -->
+            <div id="sbtc-{{ section.id }}-step-1" class="sbtc-step sbtc-step--always-visible">
+              <div class="sbtc-step__header">
+                <div id="sbtc-{{ section.id }}-step-1-icon" class="sbtc-step__icon">1</div>
+                <h3 class="sbtc-step__title">Connect Your Wallet</h3>
+              </div>
+              <div class="sbtc-step__content">
+                <div class="sbtc-wallet-controls">
+                  <button id="sbtc-{{ section.id }}-connect" class="button button--primary">Connect Wallet</button>
+                  <button id="sbtc-{{ section.id }}-disconnect" class="button button--secondary" style="display:none">Disconnect</button>
+                </div>
+                <div class="sbtc-wallet-info">
+                  <span class="sbtc-wallet-label">Address:</span>
+                  <span id="sbtc-{{ section.id }}-addr" class="sbtc-wallet-address">Not connected</span>
+                </div>
+              </div>
+            </div>
+
+
+        <!-- Step 2: Create New Order -->
+            <div id="sbtc-{{ section.id }}-step-2" class="sbtc-step sbtc-step--disabled">
+              <div class="sbtc-step__header">
+                <div id="sbtc-{{ section.id }}-step-2-icon" class="sbtc-step__icon">2</div>
+                <h3 class="sbtc-step__title">Create New Payment Order</h3>
+                <div class="sbtc-step__content">
+                  <p>sBTC / USD Cost</p>
+                </div>
+              </div>
+        
+                <div class="sbtc-form-grid">
+                  <div>
+                    <div class="field">
+             
+                      <input id="sbtc-{{ section.id }}-amount" type="number" step="0.00000001" class="field__input" value="{{ section.settings.default_amount | escape }}" readonly style="background-color: rgba(var(--color-foreground), 0.03); border-color: rgba(var(--color-foreground), 0.15); cursor: not-allowed;">
+                    </div>
+                  </div>
+                  <div>
+                    <div class="field">
+               
+                      <input id="sbtc-{{ section.id }}-cart-total" type="number" class="field__input" value="{{ cart.total_price | default: 0 | divided_by: 100.0 }}" step="0.01" readonly style="background-color: rgba(var(--color-foreground), 0.03); border-color: rgba(var(--color-foreground), 0.15); cursor: not-allowed;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+                 
+            <input id="sbtc-{{ section.id }}-cart-hash" type="hidden">
+            <input id="sbtc-{{ section.id }}-store" type="hidden" value="{{ shop.permanent_domain | split: '.' | first }}">
+            <input id="sbtc-{{ section.id }}-session" type="hidden">
+                <div class="sbtc-action-row">
+                  <button id="sbtc-{{ section.id }}-btn-purchase" class="button button--primary" disabled>Pay with sBTC</button>
+                  <span id="sbtc-{{ section.id }}-purchase-tx" class="sbtc-transaction-id"></span>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+      <!-- Sidebar: Orders & Status -->
+      <div class="cart__sidebar">
+        <div class="cart__sidebar-block">
+          <div class="cart__sidebar-header">
+            <h3 class="cart__sidebar-title">Previous Orders</h3>
+            <button id="sbtc-{{ section.id }}-btn-refresh" class="button button--tertiary button--small" style="display:none">Refresh</button>
+        </div>
+          <div id="sbtc-{{ section.id }}-orders" class="sbtc-orders-list"></div>
+          <div id="sbtc-{{ section.id }}-empty-state" class="sbtc-empty-state">
+            <p class="sbtc-empty-state__text">Connect wallet to see orders</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Details Modal -->
+  <div id="sbtc-{{ section.id }}-modal" class="sbtc-modal" style="display:none">
+    <div class="sbtc-modal__backdrop"></div>
+    <div class="sbtc-modal__content">
+      <div class="sbtc-modal__header">
+        <h3 class="sbtc-modal__title">Order Details</h3>
+        <button id="sbtc-{{ section.id }}-modal-close" class="sbtc-modal__close" type="button">
+          <svg class="icon icon-close" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M13.5 4.5L4.5 13.5M4.5 4.5L13.5 13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="visually-hidden">Close</span>
+        </button>
+      </div>
+      
+      <div id="sbtc-{{ section.id }}-modal-content" class="sbtc-modal__body">
+        <!-- Order details will be populated here -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function initSbtcCart(sectionId){
+      const prefix = id => `sbtc-${sectionId}-${id}`
+      const $ = id => document.getElementById(prefix(id))
+      function getM(){ return window.SbtcMerchant }
+      function requireM(){ const m = getM(); if(!m) throw new Error('sBTC library not loaded'); return m }
+      function onMerchantReady(cb){
+        if (getM()) { cb(getM()); return }
+        const start = Date.now()
+        const timer = setInterval(()=>{
+          const m = getM()
+          if (m) { clearInterval(timer); cb(m) }
+          else if (Date.now() - start > 10000) { clearInterval(timer); console.warn('SbtcMerchant not available after waiting') }
+        }, 50)
+      }
+
+      // Wait for the newly created order to appear, then open its modal
+      async function waitForNewOrderAndShowModal(prevOrderIds){
+        try {
+          const m = requireM()
+          const previous = new Set((prevOrderIds || []).map(id => String(id?.value ?? id)))
+          for (let attempt = 0; attempt < 20; attempt++) {
+            try {
+              const orderIds = await m.getUserOrderIds()
+              const ids = (orderIds || []).map(id => String(id?.value ?? id))
+              const newId = ids.find(id => !previous.has(id))
+              if (newId) {
+                await refreshState()
+                const data = window[`sbtcOrdersData${sectionId}`]
+                if (data) {
+                  const idx = data.orderIds.findIndex(id => String(id?.value ?? id) === String(newId))
+                  if (idx >= 0) {
+                    const orderData = data.orders[idx]
+                    const receipt = findReceiptForOrder(data.receipts, newId)
+                    showOrderModal(newId, orderData, receipt)
+                  }
+                }
+                return
+              }
+            } catch {}
+            await new Promise(r => setTimeout(r, 1000))
+          }
+        } catch (e) {
+          console.warn('waitForNewOrderAndShowModal failed', e)
+        }
+      }
+
+      // Wait for the newly created receipt to appear, then transition to success state
+      async function waitForNewReceiptAndShowSuccess(prevReceiptOrderIds){
+        try {
+          const m = requireM()
+          const previous = new Set((prevReceiptOrderIds || []).map(id => String(id?.value ?? id)))
+          for (let attempt = 0; attempt < 30; attempt++) {
+            try {
+              const receipts = await m.getMyReceipts()
+              const orders = await m.getMyOrders()
+              const dataOrderIds = await m.getUserOrderIds()
+              const newReceipt = (receipts || []).find(r => {
+                const v = r?.value || r || {}
+                const oid = v['order-id']?.value ?? v['order-id']
+                return oid != null && !previous.has(String(oid))
+              })
+              if (newReceipt) {
+                try { await refreshState() } catch {}
+                const v = newReceipt?.value || newReceipt || {}
+                const orderId = v['order-id']?.value ?? v['order-id']
+                const cached = window[`sbtcOrdersData${sectionId}`]
+                if (cached) {
+                  const idx = (cached.orderIds||[]).findIndex(id => String(id?.value ?? id) === String(orderId))
+                  if (idx >= 0) {
+                    const orderData = cached.orders[idx]
+                    showSuccessState(orderId, orderData, newReceipt)
+                  }
+                }
+                return
+              }
+            } catch {}
+            await new Promise(r => setTimeout(r, 2000))
+          }
+        } catch (e) {
+          console.warn('waitForNewReceiptAndShowSuccess failed', e)
+        }
+      }
+
+      const $addr = $('addr')
+      const $net = $('net')
+      const $ca = $('ca')
+      const $cn = $('cn')
+      const $ftCa = $('ftca')
+      const $ftCn = $('ftcn')
+      const $amount = $('amount')
+      const $cartTotal = $('cart-total')
+      const $store = $('store')
+      const $cartHash = $('cart-hash')
+      const $genHash = $('gen-hash')
+      const $session = $('session')
+      const $orderId = $('order-id')
+      const $memo = $('memo')
+      const $orders = $('orders')
+      const $receipts = $('receipts')
+
+      function renderAddress(){
+        try { $addr.textContent = (getM() && getM().getAddress()) || '-' } catch { $addr.textContent = '-' }
+      }
+
+      function setEnvFromInputs(){
+        const m = getM()
+        if (!m) return
+        try { if ($net && $net.value) m.setNetwork($net.value) } catch {}
+        try { if ($ca && $cn && $ca.value && $cn.value) m.setContract($ca.value, $cn.value) } catch {}
+        try { if ($ftCa && $ftCn && $ftCa.value && $ftCn.value) m.setSbtcToken($ftCa.value, $ftCn.value) } catch {}
+      }
+
+      function fmtTs(ts){
+        const n = Number(ts)
+        if (!Number.isFinite(n)) return '-'
+        try { return new Date(n * 1000).toLocaleString() } catch { return String(ts) }
+      }
+
+      function escapeHtmlAttr(s){
+        if (s == null) return ''
+        return String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/"/g, '&quot;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+      }
+
+      function findReceiptForOrder(receipts, orderId){
+        return receipts.find(r => {
+          const v = r?.value || r || {}
+          const rid = v['order-id']?.value ?? v['order-id']
+          return String(rid) === String(orderId)
+        })
+      }
+
+      // Resolve order data and its receipt by orderId using current cached sidebar data
+      function getOrderContextById(sectionId, orderId){
+        try {
+          const data = window[`sbtcOrdersData${sectionId}`]
+          if (!data) return null
+          const idx = (data.orderIds || []).findIndex(id => String(id?.value ?? id) === String(orderId))
+          if (idx < 0) return null
+          const orderData = data.orders?.[idx]
+          const receipt = findReceiptForOrder(data.receipts || [], orderId)
+          return { index: idx, orderData, receipt }
+        } catch { return null }
+      }
+
+      // removed live preflight check; contract and UI refresh handle state
+
+      // Idempotency + pending state helpers to avoid duplicate transfers
+      function getFulfillPendingKey(sectionId, orderId){
+        return `sbtc:fulfill:${sectionId}:${String(orderId)}`
+      }
+      function markFulfillPending(sectionId, orderId, tx){
+        try { localStorage.setItem(getFulfillPendingKey(sectionId, orderId), JSON.stringify({ ts: Date.now(), tx: String(tx||'') })) } catch {}
+      }
+      function clearFulfillPending(sectionId, orderId){
+        try { localStorage.removeItem(getFulfillPendingKey(sectionId, orderId)) } catch {}
+      }
+      function isFulfillPending(sectionId, orderId){
+        try {
+          const raw = localStorage.getItem(getFulfillPendingKey(sectionId, orderId))
+          if (!raw) return false
+          const v = JSON.parse(raw)
+          if (!v?.ts) return false
+          // Expire after 10 minutes
+          if ((Date.now() - Number(v.ts)) > 10*60*1000) { clearFulfillPending(sectionId, orderId); return false }
+          return true
+        } catch { return false }
+      }
+
+      // Show success state with payment details
+      function showSuccessState(orderId, orderData, receipt) {
+        const successState = $('success-state')
+        const paymentSteps = $('payment-steps')
+        const successDetails = $('success-details')
+        
+        // Hide payment steps, show success state
+        paymentSteps.style.display = 'none'
+        successState.style.display = 'block'
+        
+        // Populate success details
+        const cartTotal = orderData['cart-total-cents']?.value ?? orderData['cart-total-cents']
+        const amount = orderData.amount?.value ?? orderData.amount
+        const paidAmount = receipt.value?.amount?.value ?? receipt.value?.amount
+        const blockHeight = receipt.value?.['block-height']?.value ?? receipt.value?.['block-height']
+        const timestamp = receipt.value?.timestamp?.value ?? receipt.value?.timestamp
+        
+        successDetails.innerHTML = `
+          <div class="sbtc-success-state__detail-row">
+            <span class="sbtc-success-state__detail-label">Order ID:</span>
+            <span class="sbtc-success-state__detail-value">#${orderId}</span>
+          </div>
+          <div class="sbtc-success-state__detail-row">
+            <span class="sbtc-success-state__detail-label">Amount Paid:</span>
+            <span class="sbtc-success-state__detail-value">${paidAmount} sBTC</span>
+          </div>
+          <div class="sbtc-success-state__detail-row">
+            <span class="sbtc-success-state__detail-label">Cart Total:</span>
+            <span class="sbtc-success-state__detail-value">$${((cartTotal||0)/100).toFixed(2)}</span>
+          </div>
+          <div class="sbtc-success-state__detail-row">
+            <span class="sbtc-success-state__detail-label">Block Height:</span>
+            <span class="sbtc-success-state__detail-value">${blockHeight}</span>
+          </div>
+          <div class="sbtc-success-state__detail-row">
+            <span class="sbtc-success-state__detail-label">Confirmed At:</span>
+            <span class="sbtc-success-state__detail-value">${fmtTs(timestamp)}</span>
+          </div>
+        `
+        
+        // Store success data for button handlers
+        window[`sbtcSuccessData${sectionId}`] = { orderId, orderData, receipt }
+      }
+      
+      // Hide success state and show payment steps
+      function hideSuccessState() {
+        const successState = $('success-state')
+        const paymentSteps = $('payment-steps')
+        
+        successState.style.display = 'none'
+        paymentSteps.style.display = 'block'
+        
+        // Clear stored success data
+        delete window[`sbtcSuccessData${sectionId}`]
+      }
+
+      // Poll blockchain receipts to transition UI once payment is indexed/confirmed
+      async function pollForReceipt(sectionId, orderId, timeoutMs = 5*60*1000){
+        const started = Date.now()
+        while ((Date.now() - started) < timeoutMs) {
+          try {
+            const m = requireM()
+            const receipts = await m.getMyReceipts()
+            const r = findReceiptForOrder(receipts, orderId)
+            if (r) {
+              try { clearFulfillPending(sectionId, orderId) } catch {}
+              try {
+                await refreshState()
+                
+                // Show success state instead of re-opening modal
+                const data = window[`sbtcOrdersData${sectionId}`]
+                if (data) {
+                  const idx = data.orderIds.findIndex(id => String(id?.value ?? id) === String(orderId))
+                  if (idx >= 0) {
+                    const orderData = data.orders[idx]
+                    showSuccessState(orderId, orderData, r)
+                  }
+                }
+              } catch {}
+              return true
+            }
+          } catch {}
+          await new Promise(r => setTimeout(r, 2000))
+        }
+        return false
+      }
+
+      function updateStepStates(){
+        const connected = !!(getM() && getM().getAddress())
+        
+        // Step 1 - Connect Wallet (always visible)
+        const step1Icon = $('step-1-icon')
+        const step1 = $('step-1')
+        if (connected) {
+          step1Icon.className = 'sbtc-step__icon sbtc-step__icon--completed'
+          step1Icon.textContent = '✓'
+        } else {
+          step1Icon.className = 'sbtc-step__icon'
+          step1Icon.textContent = '1'
+        }
+
+        // Step 2 - Always enabled for new order creation when connected
+        const step2Icon = $('step-2-icon')
+        const step2 = $('step-2')
+        const btnPurchase = $('btn-purchase')
+        
+        if (connected) {
+          step2.classList.remove('sbtc-step--disabled')
+          step2Icon.className = 'sbtc-step__icon sbtc-step__icon--active'
+          step2Icon.textContent = '2'
+          btnPurchase.disabled = false
+        } else {
+          step2.classList.add('sbtc-step--disabled')
+          step2Icon.className = 'sbtc-step__icon'
+          step2Icon.textContent = '2'
+          btnPurchase.disabled = true
+        }
+
+        // Show/hide connect/disconnect buttons
+        $('connect').style.display = connected ? 'none' : 'inline-block'
+        $('disconnect').style.display = connected ? 'inline-block' : 'none'
+        
+        // Show/hide refresh button and update empty state text
+        const refreshBtn = $('btn-refresh')
+        const emptyState = $('empty-state')
+        const emptyStateText = emptyState.querySelector('.sbtc-empty-state__text')
+        
+        if (connected) {
+          refreshBtn.style.display = 'inline-block'
+          emptyStateText.innerHTML = 'No orders yet.<br>Create your first order above!'
+        } else {
+          refreshBtn.style.display = 'none'
+          emptyStateText.textContent = 'Connect wallet to see orders'
+        }
+      }
+
+      function showOrderModal(orderId, orderData, receipt) {
+        const modal = $('modal')
+        const modalContent = $('modal-content')
+        const modalTitle = document.querySelector('#sbtc-' + sectionId + '-modal .sbtc-modal__title')
+        
+        if (!receipt) {
+          try { console.warn('sbtc showOrderModal called without receipt', { orderId }) } catch {}
+          return
+        }
+        
+        // Update modal title
+        if (modalTitle) {
+          modalTitle.textContent = 'Business Receipt'
+        }
+        
+        const cartTotal = orderData['cart-total-cents']?.value ?? orderData['cart-total-cents']
+        const amount = receipt?.value?.amount?.value ?? receipt?.value?.amount ?? orderData.amount?.value ?? orderData.amount
+        const createdAt = orderData['created-at']?.value ?? orderData['created-at']
+        const store = orderData['shopify-store']?.value ?? orderData['shopify-store']
+        const cartHash = orderData['cart-items-hash']?.value ?? orderData['cart-items-hash']
+        const session = orderData['customer-session']?.value ?? orderData['customer-session']
+        
+        modalContent.innerHTML = `
+          <div class="sbtc-modal__section">
+            <div class="sbtc-modal__order-header">
+              <h4 class="sbtc-modal__order-title">Order #${orderId}</h4>
+              <div class="sbtc-order-item__status sbtc-order-item__status--paid">Paid</div>
+            </div>
+            
+            <div class="sbtc-modal__grid">
+              <div class="sbtc-modal__field">
+                <div class="sbtc-modal__field-label">Amount</div>
+                <div class="sbtc-modal__field-value sbtc-modal__field-value--mono">${amount} sBTC</div>
+              </div>
+              <div class="sbtc-modal__field">
+                <div class="sbtc-modal__field-label">Cart Total</div>
+                <div class="sbtc-modal__field-value">$${((cartTotal||0)/100).toFixed(2)}</div>
+              </div>
+              <div class="sbtc-modal__field">
+                <div class="sbtc-modal__field-label">Store</div>
+                <div class="sbtc-modal__field-value">${store}</div>
+              </div>
+              <div class="sbtc-modal__field">
+                <div class="sbtc-modal__field-label">Created</div>
+                <div class="sbtc-modal__field-value">${fmtTs(createdAt)}</div>
+              </div>
+            </div>
+            
+            <div class="sbtc-modal__field sbtc-modal__field--full">
+              <div class="sbtc-modal__field-label">Cart Items Hash</div>
+              <div class="sbtc-modal__code-block">${cartHash}</div>
+            </div>
+            
+            <div class="sbtc-modal__field sbtc-modal__field--full">
+              <div class="sbtc-modal__field-label">Customer Session</div>
+              <div class="sbtc-modal__code-block">${session}</div>
+            </div>
+          </div>
+          
+          <div class="sbtc-irs-receipt">
+            <div class="sbtc-irs-receipt__header">
+              <h2 class="sbtc-irs-receipt__vendor-name">${store}.shopify.com</h2>
+              <div class="sbtc-irs-receipt__vendor-details">
+                Online Digital Commerce Platform<br>
+                Business ID: ${store.toUpperCase()}<br>
+                Email: orders@${store}.com<br>
+                Web: https://${store}.shopify.com
+              </div>
+            </div>
+            
+            <h3 class="sbtc-irs-receipt__title">BUSINESS EXPENSE RECEIPT</h3>
+            
+            <div class="sbtc-irs-receipt__body">
+              <!-- Transaction Information -->
+              <div class="sbtc-irs-receipt__section">
+                <h4 class="sbtc-irs-receipt__section-title">Transaction Details</h4>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Receipt #:</span>
+                  <span class="sbtc-irs-receipt__value">${store.toUpperCase()}-${orderId}</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Transaction Date:</span>
+                  <span class="sbtc-irs-receipt__value">${fmtTs(receipt.value?.timestamp?.value ?? receipt.value?.timestamp)}</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Order Created:</span>
+                  <span class="sbtc-irs-receipt__value">${fmtTs(createdAt)}</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Payment Method:</span>
+                  <span class="sbtc-irs-receipt__value">Cryptocurrency (sBTC)</span>
+                </div>
+              </div>
+
+              <!-- Description of Goods/Services -->
+              <div class="sbtc-irs-receipt__section">
+                <h4 class="sbtc-irs-receipt__section-title">Description of Goods/Services</h4>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Item Description:</span>
+                  <span class="sbtc-irs-receipt__value">Digital Commerce Products</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Business Purpose:</span>
+                  <span class="sbtc-irs-receipt__value">E-commerce Transaction</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Category:</span>
+                  <span class="sbtc-irs-receipt__value">Business Supplies</span>
+                </div>
+              </div>
+
+              <!-- Payment Information -->
+              <div class="sbtc-irs-receipt__section">
+                <h4 class="sbtc-irs-receipt__section-title">Payment Information</h4>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Subtotal (USD):</span>
+                  <span class="sbtc-irs-receipt__value">$${((cartTotal||0)/100).toFixed(2)}</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Payment Amount (sBTC):</span>
+                  <span class="sbtc-irs-receipt__value">${receipt.value?.amount?.value ?? receipt.value?.amount} sBTC</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Exchange Rate:</span>
+                  <span class="sbtc-irs-receipt__value">Variable (Market Rate)</span>
+                </div>
+                
+                <div class="sbtc-irs-receipt__total-row">
+                  <div class="sbtc-irs-receipt__row">
+                    <span class="sbtc-irs-receipt__label">TOTAL PAID:</span>
+                    <span class="sbtc-irs-receipt__value">$${((cartTotal||0)/100).toFixed(2)} USD</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Blockchain Verification -->
+              <div class="sbtc-irs-receipt__section">
+                <h4 class="sbtc-irs-receipt__section-title">Blockchain Verification</h4>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Block Height:</span>
+                  <span class="sbtc-irs-receipt__value">${receipt.value?.['block-height']?.value ?? receipt.value?.['block-height']}</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Network:</span>
+                  <span class="sbtc-irs-receipt__value">Bitcoin (sBTC)</span>
+                </div>
+                <div class="sbtc-irs-receipt__row">
+                  <span class="sbtc-irs-receipt__label">Customer Session:</span>
+                  <span class="sbtc-irs-receipt__value" style="font-size: 0.9rem; word-break: break-all;">${session}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="sbtc-irs-receipt__footer">
+              <div class="sbtc-irs-receipt__verification">
+                <strong>✓ PAYMENT VERIFIED</strong><br>
+                This receipt serves as proof of payment for business expense purposes.<br>
+                Transaction verified on Bitcoin blockchain.
+              </div>
+              
+              <div class="sbtc-irs-receipt__print-note">
+                This is a computer-generated receipt. No signature required.<br>
+                For questions about this transaction, contact: support@${store}.com<br>
+                Receipt generated on: ${new Date().toLocaleString()}
+              </div>
+            </div>
+          </div>
+          
+          <div style="text-align: center; margin: 2rem 0;">
+            <button onclick="window.print()" class="button button--primary" style="margin-right: 1rem;">
+              Print Receipt
+            </button>
+            <button onclick="navigator.clipboard.writeText('Receipt #${store.toUpperCase()}-${orderId}\\nDate: ${fmtTs(receipt.value?.timestamp?.value ?? receipt.value?.timestamp)}\\nAmount: $${((cartTotal||0)/100).toFixed(2)} USD\\nMethod: Cryptocurrency (sBTC)')" class="button button--secondary">
+              Copy Details
+            </button>
+          </div>
+        `
+        
+        // Debug log
+        try { console.debug('sbtc showOrderModal', { orderId: String(orderId), cartTotal, amount, createdAt, store }) } catch {}
+        
+        modal.style.display = 'flex'
+        document.body.classList.add('sbtc-modal-open')
+
+        // No fulfill flow in single-step purchase
+      }
+
+      async function refreshState(){
+        try {
+          const m = requireM()
+          const [orders, receipts, orderIds] = await Promise.all([
+            m.getMyOrders(),
+            m.getMyReceipts(),
+            m.getUserOrderIds(),
+          ])
+
+          // Debug mapping sizes
+          try { console.debug('sbtc refresh sizes', { orders: orders?.length||0, receipts: receipts?.length||0, orderIds: orderIds?.length||0 }) } catch {}
+
+          let ordersHtml = ''
+          const paidReceipts = receipts || []
+          if (paidReceipts.length > 0) {
+            ordersHtml = paidReceipts.map((receipt) => {
+              const rv = receipt?.value || receipt || {}
+              const orderId = rv['order-id']?.value ?? rv['order-id']
+              const orderIndex = (orderIds || []).findIndex(id => String(id?.value ?? id) === String(orderId))
+              const o = orderIndex >= 0 ? orders?.[orderIndex] : null
+              const cartTotal = o?.['cart-total-cents']?.value ?? o?.['cart-total-cents'] ?? 0
+              const amount = rv.amount?.value ?? rv.amount ?? o?.amount?.value ?? o?.amount
+              const createdAt = o?.['created-at']?.value ?? o?.['created-at'] ?? (rv.timestamp?.value ?? rv.timestamp)
+
+              return `
+                <div class=\"sbtc-order-item\" data-order-id=\"${escapeHtmlAttr(String(orderId))}\">\n                  <div class=\"sbtc-order-item__header\">\n                    <div class=\"sbtc-order-item__title\">Order #${orderId}</div>\n                    <div class=\"sbtc-order-item__status sbtc-order-item__status--paid\">Paid</div>\n                  </div>\n                  <div class=\"sbtc-order-item__details\">\n                    ${amount} sBTC • $${((cartTotal||0)/100).toFixed(2)}\n                  </div>\n                  <div class=\"sbtc-order-item__date\">\n                    ${fmtTs(createdAt)}\n                  </div>\n                  <div class=\"sbtc-order-item__receipt\">\n                    <div class=\"sbtc-order-item__receipt-title\">✓ Payment Receipt</div>\n                    <div class=\"sbtc-order-item__receipt-details\">\n                      Block: ${rv['block-height']?.value ?? rv['block-height']} • \n                      ${fmtTs(rv.timestamp?.value ?? rv.timestamp)}\n                    </div>\n                  </div>\n                </div>
+              `
+            }).join('')
+          }
+
+          $orders.innerHTML = ordersHtml
+          const $emptyState = $('empty-state')
+          $emptyState.style.display = (receipts?.length || 0) === 0 ? 'block' : 'none'
+          
+          // Store orders data for modal access
+          window[`sbtcOrdersData${sectionId}`] = { orders, receipts, orderIds }
+          
+          // Create global modal function for this section
+          window[`sbtcShowOrderModal${sectionId}`] = async (orderId) => {
+            const data = window[`sbtcOrdersData${sectionId}`]
+            const orderIndex = (data.orderIds || []).findIndex(id => String(id?.value ?? id) === String(orderId))
+            if (orderIndex >= 0) {
+              const orderData = data.orders[orderIndex]
+              const receipt = findReceiptForOrder(data.receipts || [], orderId)
+              showOrderModal(orderId, orderData, receipt)
+            } else {
+              try { console.warn('sbtc show modal: order id not found in orderIds', { orderId, orderIds: data.orderIds }) } catch {}
+            }
+          }
+
+          // Delegate clicks to avoid inline handlers and gather diagnostics
+          try {
+            if (!$orders.__sbtcClickBound) {
+              $orders.addEventListener('click', (ev) => {
+                const el = ev.target.closest('.sbtc-order-item')
+                if (!el) return
+                const id = el.getAttribute('data-order-id')
+                try { console.debug('sbtc order item click', { id, sectionId }) } catch {}
+                if (!id) return
+                try { window[`sbtcShowOrderModal${sectionId}`]?.(id) } catch (e) { console.error('sbtc open modal failed', e, { id }) }
+              })
+              Object.defineProperty($orders, '__sbtcClickBound', { value: true, enumerable: false })
+            }
+          } catch {}
+          
+        } catch (err) {
+          $orders.innerHTML = `<div style="color:#ef4444;font-size:12px;padding:12px;border:1px solid #fecaca;border-radius:6px">${err?.message || err}</div>`
+          $('empty-state').style.display = 'none'
+        }
+        
+        updateStepStates()
+      }
+
+      async function sha256Hex(input){
+        const enc = new TextEncoder()
+        const data = enc.encode(input)
+        const hash = await crypto.subtle.digest('SHA-256', data)
+        const bytes = Array.from(new Uint8Array(hash))
+        return bytes.map(b => b.toString(16).padStart(2,'0')).join('')
+      }
+
+      async function generateCartHash(){
+        try {
+          const res = await fetch('/cart.js', { credentials: 'same-origin' })
+          const cart = await res.json()
+          const items = (cart.items||[]).map(it => ({ id: it.id, qty: it.quantity }))
+          items.sort((a,b)=> a.id===b.id ? 0 : (a.id<b.id?-1:1))
+          const canon = JSON.stringify(items)
+          return await sha256Hex(canon)
+        } catch (e) {
+          console.warn('Failed to generate cart hash', e)
+          return ''
+        }
+      }
+
+      // Fetch BTC/USD spot price (Coinbase primary, fallbacks chained)
+      async function fetchBtcUsdPrice(){
+        // Coinbase
+        try {
+          const r = await fetch('https://api.coinbase.com/v2/prices/BTC-USD/spot', { cache: 'no-store' })
+          if (r.ok) {
+            const j = await r.json()
+            const p = Number(j?.data?.amount)
+            if (Number.isFinite(p) && p > 0) return p
+          }
+        } catch {}
+        // Binance USDT (approx USD)
+        try {
+          const r = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT', { cache: 'no-store' })
+          if (r.ok) {
+            const j = await r.json()
+            const p = Number(j?.price)
+            if (Number.isFinite(p) && p > 0) return p
+          }
+        } catch {}
+        // Coindesk
+        try {
+          const r = await fetch('https://api.coindesk.com/v1/bpi/currentprice/USD.json', { cache: 'no-store' })
+          if (r.ok) {
+            const j = await r.json()
+            const p = Number(j?.bpi?.USD?.rate_float)
+            if (Number.isFinite(p) && p > 0) return p
+          }
+        } catch {}
+        throw new Error('Failed to fetch BTC/USD price')
+      }
+
+      // Auto-calc sBTC amount from cart total in USD
+      async function autoCalcSbtcAmount(){
+        try {
+          const usd = Number($cartTotal.value)
+          if (!Number.isFinite(usd) || usd <= 0) return
+          const btcUsd = await fetchBtcUsdPrice()
+          if (!Number.isFinite(btcUsd) || btcUsd <= 0) return
+          const sbtc = usd / btcUsd
+          $amount.value = sbtc.toFixed(8)
+        } catch (e) {
+          // TODO: surface non-blocking warning UI if needed
+          console.warn('sBTC auto-calc failed', e)
+        }
+      }
+
+      // button handlers
+      $('connect').onclick = async () => { 
+        try { 
+          await requireM().connect() 
+          await refreshState()
+        } finally { 
+          renderAddress()
+          updateStepStates()
+          // Update totals and auto-calc amount post-connect
+          updateCartTotalFromCurrentCart()
+          // Auto-generate cart hash on connect
+          try { const h = await generateCartHash(); if (h) $cartHash.value = h } catch {}
+        } 
+      }
+      $('disconnect').onclick = () => { 
+        try { 
+          requireM().disconnect() 
+        } finally { 
+          renderAddress()
+          updateStepStates()
+          $orders.innerHTML = ''
+          $('empty-state').style.display = 'block'
+        } 
+      }
+      
+      $('btn-purchase').onclick = async () => {
+        const btnPurchase = $('btn-purchase')
+        try {
+          // Disable button to prevent duplicate actions
+          btnPurchase.disabled = true
+          btnPurchase.textContent = 'Processing Payment...'
+          
+          setEnvFromInputs()
+          
+          // Capture existing receipt order-ids to detect the new one
+          let prevReceiptOrderIds = []
+          try {
+            const rs = await requireM().getMyReceipts()
+            prevReceiptOrderIds = (rs||[]).map(r => {
+              const v = r?.value || r || {}
+              return v['order-id']?.value ?? v['order-id']
+            }).filter(x => x!=null)
+          } catch {}
+          
+          // Auto-generate hash if empty
+          if (!$cartHash.value) {
+            const hash = await generateCartHash()
+            if (hash) $cartHash.value = hash
+          }
+          
+          // Auto-generate session if empty
+          if (!$session.value) {
+            $session.value = 'guest_' + Date.now()
+          }
+          
+          const fields = {
+            cartTotalCents: Math.round(parseFloat($cartTotal.value) * 100) || 0,
+            shopifyStore: $store.value || '{{ shop.permanent_domain | split: '.' | first }}',
+            cartItemsHash: $cartHash.value || '',
+            customerSession: $session.value,
+          }
+          
+          const tx = await requireM().purchaseWithSbtc(($amount.value||'').trim(), fields)
+          $('purchase-tx').textContent = tx
+          
+          // Immediately refresh, then wait for the new receipt and show success state
+          refreshState()
+          waitForNewReceiptAndShowSuccess(prevReceiptOrderIds)
+          // Safety delayed refresh
+          setTimeout(() => refreshState(), 1500)
+          
+        } catch (e) {
+          alert(e?.message || String(e))
+        } finally {
+          // Re-enable button after process completes (success or failure)
+          btnPurchase.disabled = false
+          btnPurchase.textContent = 'Pay with sBTC'
+        }
+      }
+      
+      // Modal handlers
+      $('modal-close').onclick = () => {
+        $('modal').style.display = 'none'
+        document.body.classList.remove('sbtc-modal-open')
+      }
+      
+      $('modal').onclick = (e) => {
+        if (e.target === $('modal') || e.target.classList.contains('sbtc-modal__backdrop')) {
+          $('modal').style.display = 'none'
+          document.body.classList.remove('sbtc-modal-open')
+        }
+      }
+      
+      // Global fulfill from modal function
+      window[`sbtcFulfillFromModal${sectionId}`] = async (orderId) => {
+        try {
+          setEnvFromInputs()
+          const memoInput = document.getElementById(`sbtc-${sectionId}-modal-memo`)
+          const txDisplay = document.getElementById(`sbtc-${sectionId}-modal-tx`)
+          const fulfillBtn = document.getElementById(`sbtc-${sectionId}-modal-fulfill`)
+
+          // Ensure wallet is connected and matches context
+          try {
+            if (!requireM().getAddress()) {
+              await requireM().connect()
+              renderAddress()
+              updateStepStates()
+            }
+          } catch {}
+          
+          fulfillBtn.disabled = true
+          fulfillBtn.textContent = 'Processing...'
+          
+          // Verify order still exists and capture canonical amount
+          let amountU = null
+          try {
+            const order = await requireM().getOrderById(String(orderId))
+            const v = order?.value || order || {}
+            const amt = v.amount?.value ?? v.amount
+            if (!amt || Number(amt) <= 0) throw new Error('Order amount unavailable')
+            amountU = String(amt)
+          } catch (e) {
+            // Continue – library fulfill will also fetch; we just improve diagnostics
+          }
+
+          // Ownership check: ensure this wallet sees the order id
+          try {
+            const ids = await requireM().getUserOrderIds()
+            const idList = (ids || []).map(id => String(id?.value ?? id))
+            if (!idList.includes(String(orderId))) {
+              fulfillBtn.disabled = false
+              fulfillBtn.textContent = 'Complete Payment'
+              txDisplay.textContent = 'This order does not belong to the connected wallet. Connect the wallet used to create the order.'
+              return
+            }
+          } catch {}
+
+          // Pre-flight: avoid duplicate transfer if receipt already exists
+          try {
+            const receipts = await requireM().getMyReceipts()
+            const existing = findReceiptForOrder(receipts, orderId)
+            if (existing) {
+              txDisplay.textContent = 'Payment already detected. Finalizing...'
+              clearFulfillPending(sectionId, orderId)
+              await refreshState()
+              setTimeout(() => { 
+                $('modal').style.display = 'none'
+                document.body.classList.remove('sbtc-modal-open')
+              }, 1200)
+              return
+            }
+          } catch {}
+
+          // Perform fulfill (library: transfer sBTC -> fulfill-after-transfer)
+          const memoVal = (memoInput?.value || '').trim()
+          const tx = await requireM().fulfill(String(orderId), memoVal)
+          txDisplay.textContent = tx
+          
+          // Poll for receipt to surface success in-UI
+          try { markFulfillPending(sectionId, orderId, tx) } catch {}
+          // Fire and forget - this will trigger success state when receipt is found
+          pollForReceipt(sectionId, orderId).then((ok)=>{
+            if (ok) {
+              try { txDisplay.textContent = 'Payment confirmed! Redirecting...' } catch {}
+              // Close modal after success state is shown
+              setTimeout(() => {
+                $('modal').style.display = 'none'
+                document.body.classList.remove('sbtc-modal-open')
+              }, 2000)
+            }
+          })
+
+          // Refresh state immediately but don't auto-close modal
+          setTimeout(() => {
+            refreshState()
+          }, 1500)
+          
+        } catch (e) {
+          const fulfillBtn = document.getElementById(`sbtc-${sectionId}-modal-fulfill`)
+          const txDisplay = document.getElementById(`sbtc-${sectionId}-modal-tx`)
+          const raw = String(e?.message || e || '')
+
+          // Targeted guidance for common contract errors
+          let msg = raw
+          if (/u401/.test(raw)) {
+            msg = 'Order not found for this wallet (u401). Connect the wallet that created the order, or refresh orders and try again.'
+          }
+
+          fulfillBtn.disabled = false
+          fulfillBtn.textContent = 'Complete Payment'
+          txDisplay.textContent = msg
+        }
+      }
+      
+      $('btn-refresh').onclick = () => { 
+        setEnvFromInputs()
+        refreshState() 
+      }
+      
+      if ($genHash) {
+        $genHash.onclick = async () => {
+          const h = await generateCartHash()
+          if (h) $cartHash.value = h
+        }
+      }
+
+
+
+      // env inputs change
+      if ($net) {
+        $net.onchange = () => { try { requireM().setNetwork($net.value) } catch {} ; renderAddress() }
+      }
+      if ($ca && $cn) {
+        $ca.onchange = () => { try { requireM().setContract($ca.value, $cn.value) } catch {} }
+        $cn.onchange = () => { try { requireM().setContract($ca.value, $cn.value) } catch {} }
+      }
+      if ($ftCa && $ftCn) {
+        $ftCa.onchange = () => { try { requireM().setSbtcToken($ftCa.value, $ftCn.value) } catch {} }
+        $ftCn.onchange = () => { try { requireM().setSbtcToken($ftCa.value, $ftCn.value) } catch {} }
+      }
+
+      // Page transition functions
+      function showSbtcCheckout() {
+        // Hide standard cart sections
+        const cartItems = document.getElementById('main-cart-items')
+        const cartFooter = document.getElementById('main-cart-footer')
+        const sbtcSection = document.getElementById('sbtc-cart-{{ section.id }}')
+        
+        if (cartItems) cartItems.style.display = 'none'
+        if (cartFooter) cartFooter.style.display = 'none'
+        if (sbtcSection) sbtcSection.style.display = 'block'
+        
+        // Update cart total fields with current cart values
+        updateCartTotalFromCurrentCart()
+        
+        // Lock cart (disable quantity controls)
+        lockCartQuantityControls(true)
+        
+        // Generate cart hash automatically
+        generateCartHash().then(hash => {
+          if (hash) $cartHash.value = hash
+        })
+      }
+      
+      function showRegularCart() {
+        // Show standard cart sections
+        const cartItems = document.getElementById('main-cart-items')
+        const cartFooter = document.getElementById('main-cart-footer')
+        const sbtcSection = document.getElementById('sbtc-cart-{{ section.id }}')
+        
+        if (cartItems) cartItems.style.display = 'block'
+        if (cartFooter) cartFooter.style.display = 'block'
+        if (sbtcSection) sbtcSection.style.display = 'none'
+        
+        // Unlock cart (re-enable quantity controls)
+        lockCartQuantityControls(false)
+        
+        // Reset any processing states
+        if (window.sbtcButtonState) {
+          window.sbtcButtonState.isProcessing = false
+        }
+        
+        // Re-expose functions to ensure they're available
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('sbtc:request-functions'))
+        }, 50)
+        
+        // Emit custom event to notify other scripts that cart was restored
+        setTimeout(() => {
+          window.dispatchEvent(new CustomEvent('sbtc:cart-restored'))
+        }, 100)
+      }
+      
+      function updateCartTotalFromCurrentCart() {
+        // Update the cart total field to match current cart
+        fetch('/cart.js', { credentials: 'same-origin' })
+          .then(res => res.json())
+          .then(cart => {
+            $cartTotal.value = (cart.total_price / 100).toFixed(2)
+            
+            // Update locked total display
+            const lockedTotalEl = document.getElementById('sbtc-locked-total-{{ section.id }}')
+            const itemCountEl = document.getElementById('sbtc-item-count-{{ section.id }}')
+            if (lockedTotalEl) {
+              // Format as currency (this is a simple approximation)
+              const formatted = new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD'
+              }).format(cart.total_price / 100)
+              lockedTotalEl.textContent = formatted
+            }
+            if (itemCountEl) {
+              itemCountEl.textContent = cart.item_count
+            }
+            // Auto-calc sBTC amount after cart total refresh
+            autoCalcSbtcAmount()
+          })
+          .catch(err => console.warn('Failed to update cart total:', err))
+      }
+      
+      function lockCartQuantityControls(lock) {
+        // Disable/enable quantity selectors and remove buttons in cart
+        const quantityInputs = document.querySelectorAll('.cart-item__quantity input, .cart-item__quantity select')
+        const removeButtons = document.querySelectorAll('.cart-item__remove, .cart-remove')
+        const updateButtons = document.querySelectorAll('.cart-item__update')
+        
+        quantityInputs.forEach(input => {
+          input.disabled = lock
+          if (lock) {
+            input.style.opacity = '0.5'
+            input.style.pointerEvents = 'none'
+          } else {
+            input.style.opacity = '1'
+            input.style.pointerEvents = 'auto'
+          }
+        })
+        
+        removeButtons.forEach(btn => {
+          btn.disabled = lock
+          if (lock) {
+            btn.style.opacity = '0.5'
+            btn.style.pointerEvents = 'none'
+          } else {
+            btn.style.opacity = '1'
+            btn.style.pointerEvents = 'auto'
+          }
+        })
+        
+        updateButtons.forEach(btn => {
+          btn.disabled = lock
+          if (lock) {
+            btn.style.opacity = '0.5'
+            btn.style.pointerEvents = 'none'
+          } else {
+            btn.style.opacity = '1'
+            btn.style.pointerEvents = 'auto'
+          }
+        })
+      }
+      
+      // Success state button handlers
+      $('back-to-steps').onclick = () => {
+        hideSuccessState()
+      }
+      
+      $('view-receipt').onclick = () => {
+        const successData = window[`sbtcSuccessData${sectionId}`]
+        if (successData) {
+          showOrderModal(successData.orderId, successData.orderData, successData.receipt)
+        }
+      }
+
+      // Back to cart button handler
+      const backToCartBtn = document.getElementById('sbtc-back-to-cart-{{ section.id }}')
+      if (backToCartBtn) {
+        backToCartBtn.onclick = showRegularCart
+      }
+
+      // init from persisted settings once merchant is ready
+      onMerchantReady((m)=>{
+        try {
+          const s = m.getSettings()
+          if ($net && typeof s?.net !== 'undefined' && $net.value !== s.net) $net.value = s.net
+          if ($ca && $cn && $ca.value && $cn.value) m.setContract($ca.value, $cn.value)
+          if ($ftCa && $ftCn && $ftCa.value && $ftCn.value) m.setSbtcToken($ftCa.value, $ftCn.value)
+        } catch {}
+        renderAddress()
+        updateStepStates()
+        // Sync cart totals and derived fields on ready
+        updateCartTotalFromCurrentCart()
+        generateCartHash().then(h => { if (h) $cartHash.value = h })
+        
+        // Auto-refresh orders if wallet is connected
+        if (m.getAddress()) {
+          refreshState()
+        }
+      })
+      
+      // Expose functions globally for cross-section communication with persistence
+      const exposeFunctions = () => {
+        window.sbtcCheckoutFunctions = window.sbtcCheckoutFunctions || {}
+        window.sbtcCheckoutFunctions.showSbtcCheckout = showSbtcCheckout
+        window.sbtcCheckoutFunctions.showRegularCart = showRegularCart
+        
+        // Also expose directly to window for immediate access
+        window.showSbtcCheckout = showSbtcCheckout
+        window.showRegularCart = showRegularCart
+        
+        // Mark as ready
+        window.sbtcCheckoutReady = true
+      }
+      
+      // Expose immediately
+      exposeFunctions()
+      
+      // Re-expose on any merchant library ready event
+      onMerchantReady(() => {
+        exposeFunctions()
+      })
+      
+      // Listen for requests to re-expose functions
+      window.addEventListener('sbtc:request-functions', exposeFunctions)
+    })("{{ section.id }}")
+  </script>
+</section>
+
+{% schema %}
+{
+  "name": "sBTC Cart",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "default_network",
+      "label": "Default network",
+      "default": "testnet",
+      "options": [
+        {"value":"testnet","label":"Testnet"},
+        {"value":"mainnet","label":"Mainnet"}
+      ]
+    },
+    {
+      "type": "text",
+      "id": "merchant_contract_address",
+      "label": "Merchant contract address",
+      "default": "STZAZZZHB8YPCNBV2ZK30HZQ9F4ZFPVYRRH8RT7N"
+    },
+    {
+      "type": "text",
+      "id": "merchant_contract_name",
+      "label": "Merchant contract name",
+      "default": "shopify"
+    },
+    {
+      "type": "text",
+      "id": "sbtc_token_address",
+      "label": "sBTC token contract address",
+      "default": "ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT"
+    },
+    {
+      "type": "text",
+      "id": "sbtc_token_name",
+      "label": "sBTC token contract name",
+      "default": "sbtc-token"
+    },
+    {
+      "type": "text",
+      "id": "default_amount",
+      "label": "Default sBTC amount",
+      "default": "0.001"
+    }
+  ]
+}
+{% endschema %}
+
+

@@ -22,9 +22,45 @@
 
       {%- unless cart.empty? -%}
         <div class="cart-page__summary">
-          {%- content_for 'block', id: 'cart-page-summary', type: '_cart-summary' -%}
+          <div class="js-contents">
+            <div>
+              {%- if cart.cart_level_discount_applications.size > 0 -%}
+                <ul class="discounts list-unstyled" role="list" aria-label="{{ 'content.discounts' | t }}">
+                  {%- for discount in cart.cart_level_discount_applications -%}
+                    <li class="discounts__discount discounts__discount--position">
+                      {{- 'icon-discount.svg' | inline_asset_content -}}
+                      {{ discount.title | escape }}
+                      (-{{ discount.total_allocated_amount | money }})
+                    </li>
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+            </div>
+
+            <div class="totals">
+              <h2 class="totals__total">{{ 'content.cart_estimated_total' | t }}</h2>
+              <p class="totals__total-value">{{ cart.total_price | money_with_currency }}</p>
+            </div>
+
+            <div class="sbtc-checkout-section" style="margin-top: 16px;">
+              <button 
+                id="sbtc-checkout-btn" 
+                class="button button--secondary button--full-width"
+                {% if cart == empty %}disabled{% endif %}
+                style="margin-bottom: 8px;"
+              >
+                Checkout with sBTC
+              </button>
+            </div>
+
+            <div class="tax-note caption-large rte">
+              {% render 'tax-info', has_discounts_enabled: cart.cart_level_discount_applications.size > 0 %}
+            </div>
+          </div>
         </div>
       {%- endunless -%}
+
+      <div id="cart-errors"></div>
 
       <div class="cart-page__more-blocks">
         {%- content_for 'blocks' -%}
@@ -32,6 +68,193 @@
     </div>
   </div>
 </cart-items-component>
+
+<script>
+  // sBTC Checkout button functionality with DOM replacement detection
+  (function() {
+    let sbtcButtonState = {
+      isInitialized: false,
+      isProcessing: false,
+      lastClickTime: 0,
+      clickDebounceDelay: 500,
+      observer: null
+    }
+
+    function initSbtcCheckoutButton() {
+      const sbtcCheckoutBtn = document.getElementById('sbtc-checkout-btn')
+      
+      if (!sbtcCheckoutBtn) {
+        console.log('sBTC button not found, will retry on DOM changes')
+        return false
+      }
+      
+      if (sbtcCheckoutBtn.hasAttribute('data-sbtc-initialized')) {
+        return true
+      }
+      
+      sbtcCheckoutBtn.addEventListener('click', handleSbtcCheckoutClick)
+      sbtcCheckoutBtn.setAttribute('data-sbtc-initialized', 'true')
+      
+      sbtcButtonState.isInitialized = true
+      return true
+    }
+
+    function setSbtcActive(isActive) {
+      const cartPage = document.querySelector('.cart-page')
+      if (!cartPage) return
+      if (isActive) {
+        cartPage.classList.add('sbtc-active')
+      } else {
+        cartPage.classList.remove('sbtc-active')
+      }
+    }
+
+    function handleSbtcCheckoutClick(event) {
+      event.preventDefault()
+      
+      const now = Date.now()
+      
+      if (now - sbtcButtonState.lastClickTime < sbtcButtonState.clickDebounceDelay) {
+        return
+      }
+      
+      sbtcButtonState.lastClickTime = now
+      
+      if (sbtcButtonState.isProcessing) {
+        return
+      }
+      
+      sbtcButtonState.isProcessing = true
+      
+      const btn = event.target
+      const originalText = btn.textContent
+      btn.disabled = true
+      btn.textContent = 'Loading...'
+      setSbtcActive(true)
+      
+      attemptSbtcCheckout(0, () => {
+        sbtcButtonState.isProcessing = false
+        btn.disabled = false
+        btn.textContent = originalText
+      }, () => {
+        // On final failure
+        setSbtcActive(false)
+      })
+    }
+
+    function attemptSbtcCheckout(retryCount, resetCallback, onFinalFailure) {
+      const maxRetries = 8
+      const baseDelay = 200
+      const retryDelay = retryCount === 0 ? 0 : Math.min(baseDelay * Math.pow(1.5, retryCount), 2000)
+      
+      setTimeout(() => {
+        if (retryCount > 0 && retryCount % 3 === 0) {
+          window.dispatchEvent(new CustomEvent('sbtc:request-functions'))
+        }
+        
+        if (window.sbtcCheckoutFunctions && window.sbtcCheckoutFunctions.showSbtcCheckout) {
+          resetCallback()
+          window.sbtcCheckoutFunctions.showSbtcCheckout()
+        } else if (window.showSbtcCheckout && typeof window.showSbtcCheckout === 'function') {
+          resetCallback()
+          window.showSbtcCheckout()
+        } else if (window.sbtcCheckoutReady && retryCount > 2) {
+          window.dispatchEvent(new CustomEvent('sbtc:request-functions'))
+          if (retryCount < maxRetries) {
+            attemptSbtcCheckout(retryCount + 1, resetCallback, onFinalFailure)
+          } else {
+            resetCallback()
+            alert('sBTC checkout had an error. Please refresh the page and try again.')
+            if (typeof onFinalFailure === 'function') onFinalFailure()
+          }
+        } else if (retryCount < maxRetries) {
+          attemptSbtcCheckout(retryCount + 1, resetCallback, onFinalFailure)
+        } else {
+          resetCallback()
+          alert('sBTC checkout is temporarily unavailable. Please refresh the page and try again.')
+          if (typeof onFinalFailure === 'function') onFinalFailure()
+        }
+      }, retryDelay)
+    }
+
+    function setupDOMObserver() {
+      if (sbtcButtonState.observer) {
+        sbtcButtonState.observer.disconnect()
+      }
+
+      const cartFooter = document.querySelector('.cart-page__summary')
+      if (!cartFooter) {
+        return
+      }
+
+      sbtcButtonState.observer = new MutationObserver((mutations) => {
+        let shouldReinit = false
+
+        mutations.forEach((mutation) => {
+          if (mutation.type === 'childList') {
+            const buttonExists = document.getElementById('sbtc-checkout-btn')
+            if (!buttonExists || !buttonExists.hasAttribute('data-sbtc-initialized')) {
+              shouldReinit = true
+            }
+          }
+        })
+
+        if (shouldReinit && !sbtcButtonState.isProcessing) {
+          clearTimeout(window.sbtcReinitTimer)
+          window.sbtcReinitTimer = setTimeout(() => {
+            initSbtcCheckoutButton()
+          }, 50)
+        }
+      })
+
+      sbtcButtonState.observer.observe(cartFooter, {
+        childList: true,
+        subtree: true
+      })
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initSbtcCheckoutButton()
+      setupDOMObserver()
+    })
+
+    if (typeof subscribe === 'function' && window.PUB_SUB_EVENTS) {
+      subscribe(window.PUB_SUB_EVENTS.cartUpdate, () => {
+        clearTimeout(window.sbtcReinitTimer)
+        window.sbtcReinitTimer = setTimeout(() => {
+          if (!sbtcButtonState.isProcessing) {
+            initSbtcCheckoutButton()
+          }
+        }, 100)
+      })
+    }
+
+    document.addEventListener('cart:updated', () => {
+      clearTimeout(window.sbtcReinitTimer)
+      window.sbtcReinitTimer = setTimeout(() => {
+        if (!sbtcButtonState.isProcessing) {
+          initSbtcCheckoutButton()
+        }
+      }, 100)
+    })
+
+    window.addEventListener('sbtc:cart-restored', () => {
+      setTimeout(() => {
+        sbtcButtonState.isProcessing = false
+        initSbtcCheckoutButton()
+        setupDOMObserver()
+        setSbtcActive(false)
+      }, 100)
+    })
+
+    // Close/back hooks from sBTC flow
+    window.addEventListener('sbtc:close', () => setSbtcActive(false))
+    window.addEventListener('sbtc:back', () => setSbtcActive(false))
+    window.addEventListener('sbtc:checkout:closed', () => setSbtcActive(false))
+
+    window.sbtcButtonState = sbtcButtonState
+  })()
+</script>
 
 {% stylesheet %}
   .cart-page {
@@ -72,6 +295,12 @@
 
   .cart-page__summary {
     padding-top: var(--padding-xl);
+  }
+
+  /* Hide cart items and totals/summary when sBTC flow is active */
+  .cart-page.sbtc-active .cart-page__items,
+  .cart-page.sbtc-active .cart-page__summary {
+    display: none;
   }
 
   @media screen and (min-width: 750px) {
